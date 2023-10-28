@@ -48,7 +48,7 @@ export default function Home() {
         {loading ? (
           <SkeletonCard />
         ) : (
-          posts?.map((post) => (
+          posts && posts?.map((post) => (
             <VoteCard
               key={post.title.toLowerCase().replace(" ", "-")}
               title={post.title}
