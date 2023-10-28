@@ -10,25 +10,18 @@ import VoteCard from "@/components/VoteCard";
 import { db } from "@/components/firebase/config";
 
 export default function Home() {
-  const [posts, setPosts] = useState<any[]>([])
+  const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect( () => {
-    async function getPosts() {
-      const q = query(collection(db, "posts"));
-      onSnapshot(q, (querySnapshot) => {
-        const posts: any[] = [];
-        querySnapshot.forEach((doc) => {
-          posts.push(doc.data());
-        });
-        setPosts(posts as any[]
-        );
-      }
-      );
-      setLoading(false);
-    }
-    getPosts()
-    } , [])
+  const q = query(collection(db, "posts"));
+  onSnapshot(q, (querySnapshot) => {
+    const posts: any[] = [];
+    querySnapshot.forEach((doc) => {
+      posts.push(doc.data());
+    });
+    setPosts(posts as any[]);
+    setLoading(false);
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center ">
@@ -49,18 +42,19 @@ export default function Home() {
         {loading ? (
           <SkeletonCard />
         ) : (
-        posts?.map((post) => (
-          <VoteCard
-            key={post.title.toLowerCase().replace(" ", "-")}
-            title={post.title}
-            description={post.description}
-            votes={post.votes}
-            image={post.image}
-            tipModalitate={post.tipModalitate}
-            perioada={post.perioada}
-            id={post.title.toLowerCase().replace(" ", "-")}
-          />
-        )))}
+          posts?.map((post) => (
+            <VoteCard
+              key={post.title.toLowerCase().replace(" ", "-")}
+              title={post.title}
+              description={post.description}
+              votes={post.votes}
+              image={post.image}
+              tipModalitate={post.tipModalitate}
+              perioada={post.perioada}
+              id={post.title.toLowerCase().replace(" ", "-")}
+            />
+          ))
+        )}
       </section>
     </main>
   );
