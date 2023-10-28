@@ -3,10 +3,8 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { AlertCircle } from "lucide-react";
-import { Query } from "appwrite";
 import SkeletonCard from "@/components/SkeletonCard";
 import VoteCard from "@/components/VoteCard";
-import { database } from "./appwrite";
 import { useState } from "react";
 
 const VOTE_CARDS = [
@@ -42,30 +40,7 @@ const VOTE_CARDS = [
 export default function Home() {
   const [posts, setPosts] = useState<any[]>([])
   const [loading, setLoading] = useState(true);
-  let promise = database.listDocuments("eramus-vote", "posts", [
-    Query.orderDesc("votes"),
-  ]);
-
-  promise.then(
-    function (response) {
-      let posts = response.documents.map((post) => {
-        return {
-          title: post.title,
-          description: post.description,
-          votes: post.votes,
-          image: post.image,
-          tipModalitate: post.tipModalitate,
-          perioada: post.perioada,
-          id: post.$id,
-        };
-      });
-      setPosts(posts);
-      setLoading(false);
-    },
-    function (error) {
-      console.log(error);
-    }
-  );
+  
   return (
     <main className="flex min-h-screen flex-col items-center ">
       <div className="w-full mt-4">
