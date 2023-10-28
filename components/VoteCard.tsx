@@ -36,7 +36,6 @@ const VoteCard = ({
   tipModalitate,
   perioada,
   id,
-  ...props
 }: VoteCardProps) => {
   const [alreadyVoted, setAlreadyVoted] = useState(true);
   const { toast } = useToast();
@@ -70,7 +69,7 @@ const VoteCard = ({
   };
 
   return (
-    <Card className={"w-full"} {...props}>
+    <Card className={"w-full"}>
       <CardHeader className="p-3">
         <div className="w-full aspect-video rounded-lg mb-3 relative overflow-hidden">
           <Image

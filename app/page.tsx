@@ -13,16 +13,16 @@ export default function Home() {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-
-  // const q = query(collection(db, "posts"));
-  // onSnapshot(q, (querySnapshot) => {
-  //   const posts: any[] = [];
-  //   querySnapshot.forEach((doc) => {
-  //     posts.push(doc.data());
-  //   });
-  //   setPosts(posts as any[]);
-  //   setLoading(false);
-  // });
+  
+  const q = query(collection(db, "posts"));
+  onSnapshot(q, (querySnapshot) => {
+    const posts: any[] = [];
+    querySnapshot.forEach((doc) => {
+      posts.push(doc.data());
+    });
+    setPosts(posts as any[]);
+    setLoading(false);
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center ">
