@@ -22,23 +22,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import React from "react";
-import { account } from "../app/appwrite";
 
 const Header = () => {
-  const [sesion, setSesion] = React.useState(false);
-  React.useEffect(() => {
-    const checkSesion = async () => {
-      let sesion = await account.getSession('current');
-      if(sesion) setSesion(true);
-    }
-    checkSesion();
-  }, []);
   
-  const handleLogin  = async () => {
-    account.createOAuth2Session("facebook")
-;
-    
-  };
   return (
     <header className="flex justify-between items-center w-full h-16 border-b">
       <div className="flex items-center gap-3">
@@ -133,7 +119,7 @@ const Header = () => {
                   <DialogDescription className="pb-3">
                     Logați-vă cu contul de Facebook pentru a putea vota.
                   </DialogDescription>
-                  <Button variant={"default"} onClick={handleLogin}>
+                  <Button variant={"default"} >
                     <Facebook size={20} className="mr-2" />
                     Autentificare cu Facebook
                   </Button>

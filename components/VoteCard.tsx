@@ -13,7 +13,6 @@ import { Eye, Vote } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { database } from "@/app/appwrite";
 import { useToast } from "./ui/use-toast";
 
 interface VoteCardProps {
@@ -38,20 +37,7 @@ const VoteCard = ({
 }: VoteCardProps) => {
   const { toast } = useToast();
 
-  const handleVote = () => {
-    const promise = database.updateDocument("eramus-vote", "posts", id, {
-      votes: votes + 1,
-    });
 
-    promise.then(function (response) {
-      toast({
-        variant: "default",
-        title: "Votul a fost înregistrat! 🎉",
-        description:
-          "Vă mulțumim pentru vot! Rezultatele vor fi afișate în 30 Noiembrie.",
-      });
-    });
-  };
 
   return (
     <Card className={"w-full"} {...props}>
@@ -109,7 +95,7 @@ const VoteCard = ({
         <Button variant={"outline"} className="w-1/2">
           Vezi postarea
         </Button>
-        <Button variant={"default"} className="w-1/2" onClick={handleVote}>
+        <Button variant={"default"} className="w-1/2" >
           Votează
           <Vote size={20} className="ml-2" />
         </Button>
