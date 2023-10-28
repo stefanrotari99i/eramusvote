@@ -15,14 +15,14 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Facebook, Lock, LogOut } from "lucide-react";
-import { FacebookAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import React, { useEffect } from "react";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
+import React from "react";
 import { auth } from "./firebase/config";
 
 const Header = () => {
@@ -30,7 +30,6 @@ const Header = () => {
   const provider = new FacebookAuthProvider();
 
 
-  useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user)
@@ -38,19 +37,9 @@ const Header = () => {
         setUser(null)
       }
     })
-  }
-  , [])
 
   const signInWithFacebook = () => {
     signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result)
-      setUser(result.user?.reloadUserInfo)
-    }
-    )
-    .catch((error) => {
-      console.log(error)
-    })
   }
 
   const signOut = () => {

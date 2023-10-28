@@ -48,7 +48,6 @@ export default function Home() {
   useEffect( () => {
     async function getPosts() {
       const q = query(collection(db, "posts"));
-      
       onSnapshot(q, (querySnapshot) => {
         const posts: any[] = [];
         querySnapshot.forEach((doc) => {
