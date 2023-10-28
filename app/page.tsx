@@ -7,9 +7,11 @@ import { AlertCircle } from "lucide-react";
 import SkeletonCard from "@/components/SkeletonCard";
 import VoteCard from "@/components/VoteCard";
 import { db } from "@/components/firebase/config";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
+  const { isFallback } = useRouter();
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,9 +25,13 @@ export default function Home() {
     setLoading(false);
   });
 
+  if (isFallback) {
+    return <h1 className="text-2xl">Loading...</h1>;
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center ">
-      {/* <div className="w-full mt-4">
+      <div className="w-full mt-4">
         <Alert className="bg-blue-100 border-none">
           <AlertCircle size={24} className="text-blue-900" />
           <AlertTitle className="ml-4 text-blue-800">
@@ -55,7 +61,7 @@ export default function Home() {
             />
           ))
         )}
-      </section> */}
+      </section>
     </main>
   );
 }
