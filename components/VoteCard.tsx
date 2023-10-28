@@ -41,18 +41,18 @@ const VoteCard = ({
   const { toast } = useToast();
   const user = auth.currentUser || null;
 
-  useEffect(() => {
-    if (user) {
-      const uid = user.uid;
-      if (votes.includes(uid)) {
-        setAlreadyVoted(true);
-      } else {
-        setAlreadyVoted(false);
-      }
-    } else {
-      setAlreadyVoted(true);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     const uid = user.uid;
+  //     if (votes.includes(uid)) {
+  //       setAlreadyVoted(true);
+  //     } else {
+  //       setAlreadyVoted(false);
+  //     }
+  //   } else {
+  //     setAlreadyVoted(true);
+  //   }
+  // }, [user, votes]);
 
   const handleVote = async () => {
     const postRef = doc(db, "posts", id);

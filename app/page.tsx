@@ -10,19 +10,18 @@ import { db } from "@/components/firebase/config";
 import { useState } from "react";
 
 export default function Home() {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [posts, setPosts] = useState<any[]>([]);
+  // const [loading, setLoading] = useState(true);
 
-
-  const q = query(collection(db, "posts"));
-  onSnapshot(q, (querySnapshot) => {
-    const posts: any[] = [];
-    querySnapshot.forEach((doc) => {
-      posts.push(doc.data());
-    });
-    setPosts(posts as any[]);
-    setLoading(false);
-  });
+  // const q = query(collection(db, "posts"));
+  // onSnapshot(q, (querySnapshot) => {
+  //   const posts: any[] = [];
+  //   querySnapshot.forEach((doc) => {
+  //     posts.push(doc.data());
+  //   });
+  //   setPosts(posts as any[]);
+  //   setLoading(false);
+  // });
 
   return (
     <main className="flex min-h-screen flex-col items-center ">
@@ -40,10 +39,11 @@ export default function Home() {
         </Alert>
       </div>
       <section className="grid grid-cols-[repeat(auto-fill,minmax(290px,1fr))] gap-4 my-4 w-full">
-        {loading ? (
+        {/* {loading ? (
           <SkeletonCard />
         ) : (
-          posts && posts?.map((post) => (
+          posts &&
+          posts?.map((post) => (
             <VoteCard
               key={post.title.toLowerCase().replace(" ", "-")}
               title={post.title}
@@ -55,7 +55,7 @@ export default function Home() {
               id={post.title.toLowerCase().replace(" ", "-")}
             />
           ))
-        )}
+        )} */}
       </section>
     </main>
   );
