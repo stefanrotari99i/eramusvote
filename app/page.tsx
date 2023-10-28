@@ -7,27 +7,22 @@ import { AlertCircle } from "lucide-react";
 import SkeletonCard from "@/components/SkeletonCard";
 import VoteCard from "@/components/VoteCard";
 import { db } from "@/components/firebase/config";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
-  const { isFallback } = useRouter();
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const q = query(collection(db, "posts"));
-  onSnapshot(q, (querySnapshot) => {
-    const posts: any[] = [];
-    querySnapshot.forEach((doc) => {
-      posts.push(doc.data());
-    });
-    setPosts(posts as any[]);
-    setLoading(false);
-  });
 
-  if (isFallback) {
-    return <h1 className="text-2xl">Loading...</h1>;
-  }
+  // const q = query(collection(db, "posts"));
+  // onSnapshot(q, (querySnapshot) => {
+  //   const posts: any[] = [];
+  //   querySnapshot.forEach((doc) => {
+  //     posts.push(doc.data());
+  //   });
+  //   setPosts(posts as any[]);
+  //   setLoading(false);
+  // });
 
   return (
     <main className="flex min-h-screen flex-col items-center ">
