@@ -41,6 +41,18 @@ const VoteCard = ({
   const { toast } = useToast();
   const user = auth.currentUser || null;
 
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+        setAlreadyVoted(true);
+    } else {
+      if (votes.includes(user.uid)) {
+        setAlreadyVoted(true);
+      } else {
+        setAlreadyVoted(false);
+      }
+    }
+  });
+
   useEffect(() => {
     if (user) {
       const uid = user.uid;
