@@ -2,12 +2,12 @@
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { collection, onSnapshot, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
 
 import { AlertCircle } from "lucide-react";
 import SkeletonCard from "@/components/SkeletonCard";
 import VoteCard from "@/components/VoteCard";
 import { db } from "@/components/firebase/config";
+import { useState } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState<any[]>([]);
