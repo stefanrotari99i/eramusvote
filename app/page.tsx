@@ -1,11 +1,15 @@
 "use client";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import { getDatabase, ref, } from "firebase/database";
+import { useEffect, useState } from "react";
 
 import { AlertCircle } from "lucide-react";
 import SkeletonCard from "@/components/SkeletonCard";
 import VoteCard from "@/components/VoteCard";
-import { useState } from "react";
+import { db } from "@/components/firebase/config";
+import { getDocs } from "firebase/firestore";
 
 const VOTE_CARDS = [
   {
@@ -40,7 +44,25 @@ const VOTE_CARDS = [
 export default function Home() {
   const [posts, setPosts] = useState<any[]>([])
   const [loading, setLoading] = useState(true);
-  
+
+  useEffect( () => {
+    async function getPosts() {
+      const q = query(collection(db, "posts"));
+      
+      onSnapshot(q, (querySnapshot) => {
+        const posts: any[] = [];
+        querySnapshot.forEach((doc) => {
+          posts.push(doc.data());
+        });
+        setPosts(posts as any[]
+        );
+      }
+      );
+      setLoading(false);
+    }
+    getPosts()
+    } , [])
+
   return (
     <main className="flex min-h-screen flex-col items-center ">
       <div className="w-full mt-4">
@@ -60,16 +82,16 @@ export default function Home() {
         {loading ? (
           <SkeletonCard />
         ) : (
-        posts.map((post) => (
+        posts?.map((post) => (
           <VoteCard
-            key={post.id}
+            key={post.title.toLowerCase().replace(" ", "-")}
             title={post.title}
             description={post.description}
             votes={post.votes}
             image={post.image}
             tipModalitate={post.tipModalitate}
             perioada={post.perioada}
-            id={post.id}
+            id={post.title.toLowerCase().replace(" ", "-")}
           />
         )))}
       </section>

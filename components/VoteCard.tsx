@@ -9,10 +9,14 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Eye, Vote } from "lucide-react";
+import { doc, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "./firebase/config";
+import { db } from "./firebase/config";
 import { useToast } from "./ui/use-toast";
 
 interface VoteCardProps {
@@ -35,9 +39,36 @@ const VoteCard = ({
   id,
   ...props
 }: VoteCardProps) => {
+  const [alreadyVoted, setAlreadyVoted] = useState(true);
   const { toast } = useToast();
+  const user = auth.currentUser;
 
+  useEffect(() => {
+    if (user) {
+      const uid = user.uid;
+      if (votes.includes(uid)) {
+        setAlreadyVoted(true);
+      } else {
+        setAlreadyVoted(false);
+      }
+    } else {
+      setAlreadyVoted(true);
+    }
+  }, [user]);
 
+  const handleVote = async () => {
+    const postRef = doc(db, "posts", id);
+
+    await updateDoc(postRef, {
+      votes: [...votes, user.uid],
+    });
+    setAlreadyVoted(true);
+
+    toast({
+      title: "Ai votat cu succes!",
+      description: "Mulțumim pentru votul tău.",
+    });
+  };
 
   return (
     <Card className={"w-full"} {...props}>
@@ -68,7 +99,7 @@ const VoteCard = ({
             </CardDescription>
           </div>
           <div className="flex flex-col text-center border p-2 rounded-sm">
-            <h2 className="text-3xl font-bold ">{votes}</h2>
+            <h2 className="text-3xl font-bold ">{votes.length}</h2>
             <p className="text-xs text-muted-foreground">voturi</p>
           </div>
         </div>
@@ -95,7 +126,12 @@ const VoteCard = ({
         <Button variant={"outline"} className="w-1/2">
           Vezi postarea
         </Button>
-        <Button variant={"default"} className="w-1/2" >
+        <Button
+          variant={"default"}
+          className="w-1/2"
+          disabled={alreadyVoted}
+          onClick={handleVote}
+        >
           Votează
           <Vote size={20} className="ml-2" />
         </Button>

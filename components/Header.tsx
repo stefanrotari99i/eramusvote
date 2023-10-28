@@ -15,15 +15,53 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Facebook, Lock, LogOut } from "lucide-react";
+import { FacebookAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import React, { useEffect } from "react";
 
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
-import React from "react";
+import { auth } from "./firebase/config";
 
 const Header = () => {
+  const [user, setUser] = React.useState<any>(null)
+  const provider = new FacebookAuthProvider();
+
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user)
+      } else {
+        setUser(null)
+      }
+    })
+  }
+  , [])
+
+  const signInWithFacebook = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result)
+      setUser(result.user?.reloadUserInfo)
+    }
+    )
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  const signOut = () => {
+    auth.signOut()
+    .then(() => {
+      setUser(null)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
   
   return (
     <header className="flex justify-between items-center w-full h-16 border-b">
@@ -80,31 +118,35 @@ const Header = () => {
         </nav>
       </div>
       <div className="flex items-center gap-3">
+        {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2">
               <Image
-                src={"/mugi.jpeg"}
+                src={user?.photoURL}
                 alt={"logo"}
                 width={35}
                 height={35}
                 className="object-cover rounded-full aspect-square"
               />
               <div className="flex-col items-start hidden sm:flex">
-                <p className="text-xs md:text-sm">Stefan Rotair</p>
+                <p className="text-xs md:text-sm">
+                  {user?.displayName}
+                </p>
                 <p className="text-xs text-muted-foreground -mt-[2px]">
-                  @stefanrotari
+                  {user?.federatedId}
                 </p>
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>
-                <Button variant={"destructive"} className="w-full text-left">
+                <Button variant={"destructive"} className="w-full text-left" onClick={signOut}>
                   <LogOut size={16} className="mr-2" />
                   Deconectare
                 </Button>
               </DropdownMenuLabel>
             </DropdownMenuContent>
           </DropdownMenu>
+        ) : (
           <div className="flex items-center gap-3">
             <Dialog>
               <DialogTrigger asChild>
@@ -119,7 +161,7 @@ const Header = () => {
                   <DialogDescription className="pb-3">
                     Logați-vă cu contul de Facebook pentru a putea vota.
                   </DialogDescription>
-                  <Button variant={"default"} >
+                  <Button variant={"default"} onClick={signInWithFacebook}>
                     <Facebook size={20} className="mr-2" />
                     Autentificare cu Facebook
                   </Button>
@@ -155,6 +197,7 @@ const Header = () => {
               </DialogContent>
             </Dialog>
           </div>
+        )}
         <ModeToggle />
       </div>
     </header>
