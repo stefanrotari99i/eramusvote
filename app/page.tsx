@@ -1,15 +1,13 @@
 "use client";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
-import { getDatabase, ref, } from "firebase/database";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import { AlertCircle } from "lucide-react";
 import SkeletonCard from "@/components/SkeletonCard";
 import VoteCard from "@/components/VoteCard";
 import { db } from "@/components/firebase/config";
-import { getDocs } from "firebase/firestore";
 
 const VOTE_CARDS = [
   {
