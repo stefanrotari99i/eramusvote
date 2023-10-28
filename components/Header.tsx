@@ -26,32 +26,32 @@ import React from "react";
 import { auth } from "./firebase/config";
 
 const Header = () => {
-  const [user, setUser] = React.useState<any>(null)
+  const [user, setUser] = React.useState<any>(null);
   const provider = new FacebookAuthProvider();
 
-
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user)
-      } else {
-        setUser(null)
-      }
-    })
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      setUser(user);
+    } else {
+      setUser(null);
+    }
+  });
 
   const signInWithFacebook = () => {
-    signInWithPopup(auth, provider)
-  }
+    signInWithPopup(auth, provider);
+  };
 
   const signOut = () => {
-    auth.signOut()
-    .then(() => {
-      setUser(null)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
-  
+    auth
+      .signOut()
+      .then(() => {
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <header className="flex justify-between items-center w-full h-16 border-b">
       <div className="flex items-center gap-3">
@@ -118,9 +118,7 @@ const Header = () => {
                 className="object-cover rounded-full aspect-square"
               />
               <div className="flex-col items-start hidden sm:flex">
-                <p className="text-xs md:text-sm">
-                  {user?.displayName}
-                </p>
+                <p className="text-xs md:text-sm">{user?.displayName}</p>
                 <p className="text-xs text-muted-foreground -mt-[2px]">
                   {user?.federatedId}
                 </p>
@@ -128,7 +126,11 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>
-                <Button variant={"destructive"} className="w-full text-left" onClick={signOut}>
+                <Button
+                  variant={"destructive"}
+                  className="w-full text-left"
+                  onClick={signOut}
+                >
                   <LogOut size={16} className="mr-2" />
                   Deconectare
                 </Button>

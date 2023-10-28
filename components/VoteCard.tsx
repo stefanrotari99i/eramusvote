@@ -9,14 +9,13 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Eye, Vote } from "lucide-react";
+import { auth, db } from "./firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { auth } from "./firebase/config";
-import { db } from "./firebase/config";
 import { useToast } from "./ui/use-toast";
 
 interface VoteCardProps {
@@ -55,8 +54,6 @@ const VoteCard = ({
       setAlreadyVoted(true);
     }
   }, [user]);
-
-
 
   const handleVote = async () => {
     const postRef = doc(db, "posts", id);
