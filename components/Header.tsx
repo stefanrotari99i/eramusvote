@@ -80,7 +80,7 @@ const Header = () => {
             Pagina principală
           </Link>
           <Link
-            href="/despre"
+            href="/"
             passHref
             className="hover:underline hover:text-primary"
           >
@@ -98,7 +98,7 @@ const Header = () => {
             Regulament
           </Link>
           <Link
-            href="/contact"
+            href="/privacy"
             passHref
             className="hover:underline hover:text-primary"
           >
@@ -170,14 +170,14 @@ const Header = () => {
                       Regulament
                     </Link>
                     <Link
-                      href="/termeni-si-conditii"
+                      href="/privacy"
                       passHref
                       className="hover:underline"
                     >
                       Termeni și condiții
                     </Link>
                     <Link
-                      href="/politica-de-confidentialitate"
+                      href="/privacy"
                       passHref
                       className="hover:underline"
                     >
