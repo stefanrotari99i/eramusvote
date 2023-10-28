@@ -35,7 +35,7 @@ const Header = () => {
   }, []);
   
   const handleLogin  = async () => {
-    account.createOAuth2Session("facebook", 'http://localhost:3000/', 'localhost')
+    account.createOAuth2Session("facebook", 'https://eramusvote.vercel.app/', 'https://eramusvote.vercel.app/')
 ;
     
   };
