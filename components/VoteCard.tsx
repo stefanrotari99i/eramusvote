@@ -22,7 +22,7 @@ import { useToast } from "./ui/use-toast";
 interface VoteCardProps {
   title: string;
   description: string;
-  votes: number;
+  votes: any[];
   image: string;
   tipModalitate: string;
   perioada: string;
@@ -41,7 +41,7 @@ const VoteCard = ({
 }: VoteCardProps) => {
   const [alreadyVoted, setAlreadyVoted] = useState(true);
   const { toast } = useToast();
-  const user = auth.currentUser;
+  const user = auth.currentUser || null;
 
   useEffect(() => {
     if (user) {
@@ -56,11 +56,13 @@ const VoteCard = ({
     }
   }, [user]);
 
+
+
   const handleVote = async () => {
     const postRef = doc(db, "posts", id);
 
     await updateDoc(postRef, {
-      votes: [...votes, user.uid],
+      votes: [...votes, user?.uid],
     });
     setAlreadyVoted(true);
 
