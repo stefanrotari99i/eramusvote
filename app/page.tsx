@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center ">
-      <div className="w-full mt-4">
+      {/* <div className="w-full mt-4">
         <Alert className="bg-blue-100 border-none">
           <AlertCircle size={24} className="text-blue-900" />
           <AlertTitle className="ml-4 text-blue-800">
@@ -55,7 +55,7 @@ export default function Home() {
             />
           ))
         )}
-      </section>
+      </section> */}
     </main>
   );
 }
