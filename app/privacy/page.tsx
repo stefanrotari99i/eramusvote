@@ -20,11 +20,11 @@ Aceste informații sunt necesare pentru a vă putea asigura ca se va desfășura
 
 2. Scopul Colectării Datelor
 
-Datele dumneavoastră personale vor fi utilizate exclusiv în scopul organizării și gestionării concursului "Pașaport Erasmus". Nu vom utiliza informațiile dumneavoastră în alte scopuri fără consimțământul dumneavoastră.
+Datele dumneavoastră personale vor fi utilizate exclusiv în scopul organizării și gestionării concursului &quot;Pașaport Erasmus&quot;. Nu vom utiliza informațiile dumneavoastră în alte scopuri fără consimțământul dumneavoastră.
 
 3. Accesul la Date
 
-Doar membrii echipei de organizare a concursului "Pașaport Erasmus" vor avea acces la datele dumneavoastră personale. Aceste date nu vor fi partajate cu terțe părți în afara situațiilor prevăzute de lege.
+Doar membrii echipei de organizare a concursului &quot;Pașaport Erasmus&quot; vor avea acces la datele dumneavoastră personale. Aceste date nu vor fi partajate cu terțe părți în afara situațiilor prevăzute de lege.
 
 4. Securitatea Datelor
 
@@ -42,7 +42,7 @@ Conform legilor privind protecția datelor, aveți dreptul de a accesa, corecta 
 
 Această Politică de Confidențialitate poate fi actualizată periodic pentru a reflecta modificările în practicile noastre privind protecția datelor. Orice actualizări vor fi postate pe această pagină, astfel încât să fiți întotdeauna la curent cu modul în care gestionăm datele dumneavoastră personale.
 
-Vă mulțumim că ați ales să participați la concursul "Pașaport Erasmus". Ne angajăm să protejăm confidențialitatea datelor dumneavoastră personale și să asigurăm că acestea sunt utilizate numai în scopurile specificate mai sus.
+Vă mulțumim că ați ales să participați la concursul &quot;Pașaport Erasmus&quot;. Ne angajăm să protejăm confidențialitatea datelor dumneavoastră personale și să asigurăm că acestea sunt utilizate numai în scopurile specificate mai sus.
         </p>
     </div>
   )
