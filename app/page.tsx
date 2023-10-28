@@ -13,7 +13,7 @@ export default function Home() {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  
+
   const q = query(collection(db, "posts"));
   onSnapshot(q, (querySnapshot) => {
     const posts: any[] = [];
